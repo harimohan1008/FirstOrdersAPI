@@ -1,0 +1,70 @@
+### Test requests (VS Code REST Client, Visual Studio or Rider)
+@host = http://localhost:5000
+
+### 1. Log in as admin (copy the token from the response into @token below)
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{ "username": "admin", "password": "admin123" }
+
+###
+@token = PASTE_TOKEN_HERE
+
+### GET all products
+GET {{host}}/api/products
+Authorization: Bearer {{token}}
+
+### GET one product
+GET {{host}}/api/products/1
+Authorization: Bearer {{token}}
+
+### POST a new product
+POST {{host}}/api/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "name": "Mouse Pad", "category": "Accessories", "price": 12.5, "stock": 100 }
+
+### PUT (update) a product
+PUT {{host}}/api/products/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "name": "Ergonomic Keyboard v2", "category": "Accessories", "price": 99.99, "stock": 30 }
+
+### DELETE a product (admin only)
+DELETE {{host}}/api/products/6
+Authorization: Bearer {{token}}
+
+### GET orders (manager or admin)
+GET {{host}}/api/orders
+Authorization: Bearer {{token}}
+
+### POST an order
+POST {{host}}/api/orders
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "customer": "Wayne Enterprises", "date": "2026-10-30", "total": 250.0, "status": "Processing" }
+
+### PUT an order
+PUT {{host}}/api/orders/1002
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "customer": "Globex Ltd", "date": "2026-10-22", "total": 89.99, "status": "Shipped" }
+
+### DELETE an order (admin only)
+DELETE {{host}}/api/orders/1004
+Authorization: Bearer {{token}}
+
+### GET users (admin only)
+GET {{host}}/api/users
+Authorization: Bearer {{token}}
+
+### PUT a user's role (admin only)
+PUT {{host}}/api/users/3/role
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "role": "manager" }
